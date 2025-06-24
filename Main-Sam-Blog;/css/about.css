@@ -1,0 +1,343 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --text-color: #ecf0f1;
+    --accent-color: #3498db;
+    --sidebar-width: 250px;
+    --sidebar-collapsed-width: 80px;
+    --transition-speed: 0.3s;
+}
+
+[data-theme="light"] {
+    --primary-color: #ecf0f1;
+    --secondary-color: #f8fbfe;
+    --text-color: #2c3e50;
+    --accent-color: #2980b9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    transition: background-color var(--transition-speed);
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--primary-color);
+    position: fixed;
+    height: 100%;
+    padding: 20px 0;
+    transition: all var(--transition-speed);
+    z-index: 100;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-header h2 {
+    color: var(--text-color);
+    font-size: 1.5rem;
+}
+
+.sidebar-toggle {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color var(--transition-speed);
+}
+
+.sidebar-toggle:hover {
+    color: var(--accent-color);
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 20px 0;
+}
+
+.sidebar-menu li {
+    position: relative;
+}
+
+.sidebar-menu li a {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all var(--transition-speed);
+}
+
+.sidebar-menu li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--accent-color);
+}
+
+.sidebar-menu li.active a {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--accent-color);
+}
+
+.sidebar-menu li a i {
+    margin-right: 15px;
+    font-size: 1.1rem;
+}
+
+.sidebar-menu li a span {
+    transition: opacity var(--transition-speed);
+}
+
+/* Main Content Styles */
+
+span {
+    margin-right: 10px;
+}
+
+.main-content {
+    flex: 1;
+    margin-left: var(--sidebar-width);
+    transition: margin-left var(--transition-speed);
+    margin-top: 100px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--primary-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+.content {
+    padding: 20px;
+}
+
+.content h1 {
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+.content p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+/* Theme Toggle Styles */
+.theme-toggle {
+    position: relative;
+}
+
+.theme-switch {
+    opacity: 0;
+    position: absolute;
+}
+
+.theme-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    width: 60px;
+    height: 30px;
+    background: var(--secondary-color);
+    border-radius: 50px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.theme-label i {
+    font-size: 1rem;
+    color: var(--text-color);
+    z-index: 1;
+}
+
+.theme-ball {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    left: 4px;
+    transition: transform var(--transition-speed);
+}
+
+.theme-switch:checked + .theme-label .theme-ball {
+    transform: translateX(30px);
+}
+
+/* Collapsed Sidebar */
+.sidebar-collapsed .sidebar {
+    width: var(--sidebar-collapsed-width);
+}
+
+.sidebar-collapsed .sidebar-header h2,
+.sidebar-collapsed .sidebar-menu li a span {
+    opacity: 0;
+    pointer-events: none;
+    width: 0;
+}
+
+.sidebar-collapsed .sidebar-menu li a {
+    justify-content: center;
+}
+
+.sidebar-collapsed .sidebar-menu li a i {
+    margin-right: 0;
+    font-size: 1.3rem;
+}
+
+.sidebar-collapsed .main-content {
+    margin-left: var(--sidebar-collapsed-width);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        width: var(--sidebar-width);
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .sidebar-collapsed .sidebar {
+        transform: translateX(-100%);
+        width: var(--sidebar-width);
+    }
+
+    .sidebar-collapsed .main-content {
+        margin-left: 0;
+    }
+}
+
+.logo {
+    width: 300px;
+    border-radius: 50%;
+    box-shadow: 3px 15px 20px rgba(0, 0, 0, 0.2);
+}
+
+.judul {
+    font-size: 50px;
+    margin-left: 10px;
+    margin-top: 100px;
+}
+
+.welcome {
+    display: flex;
+    width: 100%;
+    justify-content: start;
+    flex-wrap: wrap;
+    gap :20px;
+}
+
+hr {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.foto {
+    width: 300px;
+    height: 200px;
+    margin: 15px;
+    border-radius: 10px;
+    float: left;
+}
+
+.container-proyek {
+    background: var(--primary-color);
+    width: 100%;
+    height:100%;
+    border-radius: 15px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.box-proyek {
+    width: 100%;
+    display: flex;
+    border-radius: 10px;
+    background: var(--secondary-color);
+    flex-wrap: wrap;
+    padding: 5px;
+}
+
+h1.judul-proyek {
+    font-size: 20px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.kunjungi {
+    padding: 15px;
+    margin: 5px;
+    text-decoration: none;
+    color: var(--text-color);
+    width: 100px;
+    height:50px;
+    text-align: center;
+    font-weight: bold;
+    background-color: var(--accent-color);
+    border-radius: 10px;
+}
+
+.footer {
+    background-color: var(--primary-color);
+    padding: 10px;
+    width: 100%;
+    height: 300px;
+}
+
+.credit {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--text-color);
+    margin-right: 10px;
+}
+
+.trims {
+    text-align: center;
+    margin-top: 20px;
+}
+
+h3 {
+    margin-top: 5px;
+    padding: 5px;
+}
